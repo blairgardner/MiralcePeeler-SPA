@@ -1,0 +1,1878 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="RateLockModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="rate_lock_cluster_divisions">
+          <Key>
+            <PropertyRef Name="division_id" />
+          </Key>
+          <Property Name="division_id" Type="tinyint" Nullable="false" />
+          <Property Name="rate_lock_cluster_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rate_lock_cluster_history">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rate_lock_cluster_id" Type="int" Nullable="false" />
+          <Property Name="division_id" Type="tinyint" Nullable="false" />
+          <Property Name="action" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rate_lock_cluster_rules">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rate_lock_rule_group_id" Type="int" Nullable="false" />
+          <Property Name="rate_lock_cluster_id" Type="int" Nullable="false" />
+          <Property Name="value" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rate_lock_clusters">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rate_lock_colors">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="hex_code" Type="varchar" MaxLength="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rate_lock_datatype_operators">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rate_lock_datatype_id" Type="tinyint" Nullable="false" />
+          <Property Name="rate_lock_operator_id" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rate_lock_datatypes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rate_lock_encompass_statuses">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rate_lock_field_options">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="tinyint" Nullable="false" />
+          <Property Name="field_id" Type="tinyint" Nullable="false" />
+          <Property Name="value" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rate_lock_fields">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="display_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="rate_lock_datatype_id" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rate_lock_folders">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rate_lock_rule_type_id" Type="tinyint" Nullable="false" />
+          <Property Name="rate_lock_rule_version_id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="rate_lock_import_history">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="old_rate_lock_id" Type="int" Nullable="false" />
+          <Property Name="new_rate_lock_id" Type="int" Nullable="false" />
+          <Property Name="import_date" Type="datetime" Nullable="false" />
+          <Property Name="imported_by" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rate_lock_loan_info">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="field" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="value" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="rate_lock_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rate_lock_manual_product_codes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="product_code_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rate_lock_manual_product_codes_history">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="product_codes" Type="varchar(max)" />
+          <Property Name="date" Type="datetime" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rate_lock_notifications">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="color_id" Type="tinyint" Nullable="false" />
+          <Property Name="message" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="date" Type="datetime" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rate_lock_operators">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="operator" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rate_lock_period_rules">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rate_lock_rule_group_id" Type="int" Nullable="false" />
+          <Property Name="lock_period" Type="tinyint" Nullable="false" />
+          <Property Name="is_available" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rate_lock_pricing_sheet">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rate_lock_pricing_sheet_values">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rate_lock_pricing_sheet_product_id" Type="int" Nullable="false" />
+          <Property Name="call_center_price" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="branch_price" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="rate_lock_pricing_sheet_id" Type="int" Nullable="false" />
+          <Property Name="lock_period" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="rate" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="investor_pricing" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="srp" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rate_lock_reporting_fields">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rate_lock_rule_groups">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="header" Type="bit" Nullable="false" />
+          <Property Name="is_hidden" Type="bit" Nullable="false" />
+          <Property Name="rate_lock_folder_id" Type="int" Nullable="false" />
+          <Property Name="does_affect_target_profit" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rate_lock_rule_types">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rate_lock_rule_values">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="rate_lock_rule_id" Type="int" Nullable="false" />
+          <Property Name="value" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rate_lock_rule_versions">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date" Type="datetime" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rate_lock_rules">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rate_lock_rule_group_id" Type="int" Nullable="false" />
+          <Property Name="rate_lock_field_id" Type="tinyint" Nullable="false" />
+          <Property Name="rate_lock_operator_id" Type="tinyint" Nullable="false" />
+          <Property Name="compare_value" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rate_lock_statuses">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rate_lock_super_users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rate_lock_types">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="rate_lock_uploads">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="contents" Type="varchar(max)" Nullable="false" />
+          <Property Name="date" Type="datetime" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rate_locks">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="loan_id" Type="int" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="date" Type="datetime" Nullable="false" />
+          <Property Name="rate" Type="decimal" Precision="7" Scale="5" Nullable="false" />
+          <Property Name="period" Type="int" Nullable="false" />
+          <Property Name="lock_duration" Type="int" Nullable="false" />
+          <Property Name="rate_lock_status_id" Type="tinyint" Nullable="false" />
+          <Property Name="rate_lock_type_id" Type="tinyint" Nullable="false" />
+          <Property Name="rate_lock_pricing_sheet_id" Type="int" Nullable="false" />
+          <Property Name="rate_lock_rule_version_id" Type="int" Nullable="false" />
+          <Property Name="rate_lock_cluster_id" Type="int" Nullable="false" />
+          <Property Name="undiscounted_rate" Type="decimal" Precision="7" Scale="5" Nullable="false" />
+          <Property Name="base_price" Type="decimal" Precision="6" Scale="3" Nullable="false" />
+          <Property Name="adjusted_price" Type="decimal" Precision="6" Scale="3" Nullable="false" />
+          <Property Name="expiration_date" Type="datetime" Nullable="false" />
+          <Property Name="days_extended" Type="int" />
+          <Property Name="extension_cost" Type="decimal" Precision="5" Scale="3" />
+          <Property Name="product_code" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="discount_paid_by_borrower" Type="decimal" Precision="6" Scale="3" />
+          <Property Name="exception_category" Type="varchar" MaxLength="50" />
+          <Property Name="exception_note" Type="varchar" MaxLength="400" />
+          <Property Name="cancel_date" Type="datetime" />
+          <Property Name="cancelled_by" Type="int" />
+          <Property Name="investor_pricing" Type="decimal" Precision="15" Scale="11" Nullable="false" />
+          <Property Name="srp" Type="decimal" Precision="15" Scale="13" Nullable="false" />
+          <Property Name="update_to_encompass_status_id" Type="tinyint" Nullable="false" />
+          <Property Name="is_branch" Type="bit" />
+        </EntityType>
+        <Association Name="FK_new_rate_lock_import_history_rate_locks">
+          <End Role="rate_locks" Type="Self.rate_locks" Multiplicity="1" />
+          <End Role="rate_lock_import_history" Type="Self.rate_lock_import_history" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rate_locks">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate_lock_import_history">
+              <PropertyRef Name="new_rate_lock_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_old_rate_lock_import_history_rate_locks">
+          <End Role="rate_locks" Type="Self.rate_locks" Multiplicity="1" />
+          <End Role="rate_lock_import_history" Type="Self.rate_lock_import_history" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rate_locks">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate_lock_import_history">
+              <PropertyRef Name="old_rate_lock_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rate_lock_cluster_divisions_cluster_id">
+          <End Role="rate_lock_clusters" Type="Self.rate_lock_clusters" Multiplicity="1" />
+          <End Role="rate_lock_cluster_divisions" Type="Self.rate_lock_cluster_divisions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rate_lock_clusters">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate_lock_cluster_divisions">
+              <PropertyRef Name="rate_lock_cluster_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rate_lock_cluster_history_rate_lock_cluster">
+          <End Role="rate_lock_clusters" Type="Self.rate_lock_clusters" Multiplicity="1" />
+          <End Role="rate_lock_cluster_history" Type="Self.rate_lock_cluster_history" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rate_lock_clusters">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate_lock_cluster_history">
+              <PropertyRef Name="rate_lock_cluster_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rate_lock_cluster_rules_cluster_id">
+          <End Role="rate_lock_clusters" Type="Self.rate_lock_clusters" Multiplicity="1" />
+          <End Role="rate_lock_cluster_rules" Type="Self.rate_lock_cluster_rules" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rate_lock_clusters">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate_lock_cluster_rules">
+              <PropertyRef Name="rate_lock_cluster_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rate_lock_cluster_rules_group_id">
+          <End Role="rate_lock_rule_groups" Type="Self.rate_lock_rule_groups" Multiplicity="1" />
+          <End Role="rate_lock_cluster_rules" Type="Self.rate_lock_cluster_rules" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rate_lock_rule_groups">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate_lock_cluster_rules">
+              <PropertyRef Name="rate_lock_rule_group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rate_lock_datatype_operators_rate_lock_datatype">
+          <End Role="rate_lock_datatypes" Type="Self.rate_lock_datatypes" Multiplicity="1" />
+          <End Role="rate_lock_datatype_operators" Type="Self.rate_lock_datatype_operators" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rate_lock_datatypes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate_lock_datatype_operators">
+              <PropertyRef Name="rate_lock_datatype_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rate_lock_datatype_operators_rate_lock_operators">
+          <End Role="rate_lock_operators" Type="Self.rate_lock_operators" Multiplicity="1" />
+          <End Role="rate_lock_datatype_operators" Type="Self.rate_lock_datatype_operators" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rate_lock_operators">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate_lock_datatype_operators">
+              <PropertyRef Name="rate_lock_operator_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rate_lock_encompass_status_id">
+          <End Role="rate_lock_encompass_statuses" Type="Self.rate_lock_encompass_statuses" Multiplicity="1" />
+          <End Role="rate_locks" Type="Self.rate_locks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rate_lock_encompass_statuses">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate_locks">
+              <PropertyRef Name="update_to_encompass_status_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rate_lock_field_options_rate_lock_fields">
+          <End Role="rate_lock_fields" Type="Self.rate_lock_fields" Multiplicity="1" />
+          <End Role="rate_lock_field_options" Type="Self.rate_lock_field_options" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rate_lock_fields">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate_lock_field_options">
+              <PropertyRef Name="field_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rate_lock_fields_rate_lock_datatypes">
+          <End Role="rate_lock_datatypes" Type="Self.rate_lock_datatypes" Multiplicity="1" />
+          <End Role="rate_lock_fields" Type="Self.rate_lock_fields" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rate_lock_datatypes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate_lock_fields">
+              <PropertyRef Name="rate_lock_datatype_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rate_lock_folders_rate_lock_rule_versions">
+          <End Role="rate_lock_rule_versions" Type="Self.rate_lock_rule_versions" Multiplicity="1" />
+          <End Role="rate_lock_folders" Type="Self.rate_lock_folders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rate_lock_rule_versions">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate_lock_folders">
+              <PropertyRef Name="rate_lock_rule_version_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rate_lock_folders_rule_type">
+          <End Role="rate_lock_rule_types" Type="Self.rate_lock_rule_types" Multiplicity="1" />
+          <End Role="rate_lock_folders" Type="Self.rate_lock_folders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rate_lock_rule_types">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate_lock_folders">
+              <PropertyRef Name="rate_lock_rule_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rate_lock_notifications_color_id">
+          <End Role="rate_lock_colors" Type="Self.rate_lock_colors" Multiplicity="1" />
+          <End Role="rate_lock_notifications" Type="Self.rate_lock_notifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rate_lock_colors">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate_lock_notifications">
+              <PropertyRef Name="color_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rate_lock_period_rules_rate_lock_rule_groups">
+          <End Role="rate_lock_rule_groups" Type="Self.rate_lock_rule_groups" Multiplicity="1" />
+          <End Role="rate_lock_period_rules" Type="Self.rate_lock_period_rules" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rate_lock_rule_groups">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate_lock_period_rules">
+              <PropertyRef Name="rate_lock_rule_group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rate_lock_pricing_sheet_values_rate_lock_pricing_sheet">
+          <End Role="rate_lock_pricing_sheet" Type="Self.rate_lock_pricing_sheet" Multiplicity="1" />
+          <End Role="rate_lock_pricing_sheet_values" Type="Self.rate_lock_pricing_sheet_values" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rate_lock_pricing_sheet">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate_lock_pricing_sheet_values">
+              <PropertyRef Name="rate_lock_pricing_sheet_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rate_lock_rule_group_folder_id">
+          <End Role="rate_lock_folders" Type="Self.rate_lock_folders" Multiplicity="1" />
+          <End Role="rate_lock_rule_groups" Type="Self.rate_lock_rule_groups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rate_lock_folders">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate_lock_rule_groups">
+              <PropertyRef Name="rate_lock_folder_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rate_lock_rule_values_rate_lock_rules">
+          <End Role="rate_lock_rules" Type="Self.rate_lock_rules" Multiplicity="1" />
+          <End Role="rate_lock_rule_values" Type="Self.rate_lock_rule_values" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rate_lock_rules">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate_lock_rule_values">
+              <PropertyRef Name="rate_lock_rule_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rate_lock_rules_group_id">
+          <End Role="rate_lock_rule_groups" Type="Self.rate_lock_rule_groups" Multiplicity="1" />
+          <End Role="rate_lock_rules" Type="Self.rate_lock_rules" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rate_lock_rule_groups">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate_lock_rules">
+              <PropertyRef Name="rate_lock_rule_group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rate_lock_rules_operator_id">
+          <End Role="rate_lock_operators" Type="Self.rate_lock_operators" Multiplicity="1" />
+          <End Role="rate_lock_rules" Type="Self.rate_lock_rules" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rate_lock_operators">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate_lock_rules">
+              <PropertyRef Name="rate_lock_operator_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rate_lock_rules_rate_lock_fields">
+          <End Role="rate_lock_fields" Type="Self.rate_lock_fields" Multiplicity="1" />
+          <End Role="rate_lock_rules" Type="Self.rate_lock_rules" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rate_lock_fields">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate_lock_rules">
+              <PropertyRef Name="rate_lock_field_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rate_locks_rate_lock_cluster_id">
+          <End Role="rate_lock_clusters" Type="Self.rate_lock_clusters" Multiplicity="1" />
+          <End Role="rate_locks" Type="Self.rate_locks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rate_lock_clusters">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate_locks">
+              <PropertyRef Name="rate_lock_cluster_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rate_locks_rate_lock_pricing_sheet_id">
+          <End Role="rate_lock_pricing_sheet" Type="Self.rate_lock_pricing_sheet" Multiplicity="1" />
+          <End Role="rate_locks" Type="Self.rate_locks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rate_lock_pricing_sheet">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate_locks">
+              <PropertyRef Name="rate_lock_pricing_sheet_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rate_locks_rate_lock_rule_version_id">
+          <End Role="rate_lock_rule_versions" Type="Self.rate_lock_rule_versions" Multiplicity="1" />
+          <End Role="rate_locks" Type="Self.rate_locks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rate_lock_rule_versions">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate_locks">
+              <PropertyRef Name="rate_lock_rule_version_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rate_locks_rate_lock_status_id">
+          <End Role="rate_lock_statuses" Type="Self.rate_lock_statuses" Multiplicity="1" />
+          <End Role="rate_locks" Type="Self.rate_locks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rate_lock_statuses">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate_locks">
+              <PropertyRef Name="rate_lock_status_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rate_locks_rate_lock_type_id">
+          <End Role="rate_lock_types" Type="Self.rate_lock_types" Multiplicity="1" />
+          <End Role="rate_locks" Type="Self.rate_locks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rate_lock_types">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate_locks">
+              <PropertyRef Name="rate_lock_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RateLockModelStoreContainer">
+          <EntitySet Name="rate_lock_cluster_divisions" EntityType="Self.rate_lock_cluster_divisions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rate_lock_cluster_history" EntityType="Self.rate_lock_cluster_history" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rate_lock_cluster_rules" EntityType="Self.rate_lock_cluster_rules" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rate_lock_clusters" EntityType="Self.rate_lock_clusters" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rate_lock_colors" EntityType="Self.rate_lock_colors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rate_lock_datatype_operators" EntityType="Self.rate_lock_datatype_operators" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rate_lock_datatypes" EntityType="Self.rate_lock_datatypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rate_lock_encompass_statuses" EntityType="Self.rate_lock_encompass_statuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rate_lock_field_options" EntityType="Self.rate_lock_field_options" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rate_lock_fields" EntityType="Self.rate_lock_fields" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rate_lock_folders" EntityType="Self.rate_lock_folders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rate_lock_import_history" EntityType="Self.rate_lock_import_history" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rate_lock_loan_info" EntityType="Self.rate_lock_loan_info" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rate_lock_manual_product_codes" EntityType="Self.rate_lock_manual_product_codes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rate_lock_manual_product_codes_history" EntityType="Self.rate_lock_manual_product_codes_history" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rate_lock_notifications" EntityType="Self.rate_lock_notifications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rate_lock_operators" EntityType="Self.rate_lock_operators" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rate_lock_period_rules" EntityType="Self.rate_lock_period_rules" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rate_lock_pricing_sheet" EntityType="Self.rate_lock_pricing_sheet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rate_lock_pricing_sheet_values" EntityType="Self.rate_lock_pricing_sheet_values" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rate_lock_reporting_fields" EntityType="Self.rate_lock_reporting_fields" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rate_lock_rule_groups" EntityType="Self.rate_lock_rule_groups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rate_lock_rule_types" EntityType="Self.rate_lock_rule_types" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rate_lock_rule_values" EntityType="Self.rate_lock_rule_values" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rate_lock_rule_versions" EntityType="Self.rate_lock_rule_versions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rate_lock_rules" EntityType="Self.rate_lock_rules" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rate_lock_statuses" EntityType="Self.rate_lock_statuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rate_lock_super_users" EntityType="Self.rate_lock_super_users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rate_lock_types" EntityType="Self.rate_lock_types" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rate_lock_uploads" EntityType="Self.rate_lock_uploads" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rate_locks" EntityType="Self.rate_locks" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_new_rate_lock_import_history_rate_locks" Association="Self.FK_new_rate_lock_import_history_rate_locks">
+            <End Role="rate_locks" EntitySet="rate_locks" />
+            <End Role="rate_lock_import_history" EntitySet="rate_lock_import_history" />
+          </AssociationSet>
+          <AssociationSet Name="FK_old_rate_lock_import_history_rate_locks" Association="Self.FK_old_rate_lock_import_history_rate_locks">
+            <End Role="rate_locks" EntitySet="rate_locks" />
+            <End Role="rate_lock_import_history" EntitySet="rate_lock_import_history" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rate_lock_cluster_divisions_cluster_id" Association="Self.FK_rate_lock_cluster_divisions_cluster_id">
+            <End Role="rate_lock_clusters" EntitySet="rate_lock_clusters" />
+            <End Role="rate_lock_cluster_divisions" EntitySet="rate_lock_cluster_divisions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rate_lock_cluster_history_rate_lock_cluster" Association="Self.FK_rate_lock_cluster_history_rate_lock_cluster">
+            <End Role="rate_lock_clusters" EntitySet="rate_lock_clusters" />
+            <End Role="rate_lock_cluster_history" EntitySet="rate_lock_cluster_history" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rate_lock_cluster_rules_cluster_id" Association="Self.FK_rate_lock_cluster_rules_cluster_id">
+            <End Role="rate_lock_clusters" EntitySet="rate_lock_clusters" />
+            <End Role="rate_lock_cluster_rules" EntitySet="rate_lock_cluster_rules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rate_lock_cluster_rules_group_id" Association="Self.FK_rate_lock_cluster_rules_group_id">
+            <End Role="rate_lock_rule_groups" EntitySet="rate_lock_rule_groups" />
+            <End Role="rate_lock_cluster_rules" EntitySet="rate_lock_cluster_rules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rate_lock_datatype_operators_rate_lock_datatype" Association="Self.FK_rate_lock_datatype_operators_rate_lock_datatype">
+            <End Role="rate_lock_datatypes" EntitySet="rate_lock_datatypes" />
+            <End Role="rate_lock_datatype_operators" EntitySet="rate_lock_datatype_operators" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rate_lock_datatype_operators_rate_lock_operators" Association="Self.FK_rate_lock_datatype_operators_rate_lock_operators">
+            <End Role="rate_lock_operators" EntitySet="rate_lock_operators" />
+            <End Role="rate_lock_datatype_operators" EntitySet="rate_lock_datatype_operators" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rate_lock_encompass_status_id" Association="Self.FK_rate_lock_encompass_status_id">
+            <End Role="rate_lock_encompass_statuses" EntitySet="rate_lock_encompass_statuses" />
+            <End Role="rate_locks" EntitySet="rate_locks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rate_lock_field_options_rate_lock_fields" Association="Self.FK_rate_lock_field_options_rate_lock_fields">
+            <End Role="rate_lock_fields" EntitySet="rate_lock_fields" />
+            <End Role="rate_lock_field_options" EntitySet="rate_lock_field_options" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rate_lock_fields_rate_lock_datatypes" Association="Self.FK_rate_lock_fields_rate_lock_datatypes">
+            <End Role="rate_lock_datatypes" EntitySet="rate_lock_datatypes" />
+            <End Role="rate_lock_fields" EntitySet="rate_lock_fields" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rate_lock_folders_rate_lock_rule_versions" Association="Self.FK_rate_lock_folders_rate_lock_rule_versions">
+            <End Role="rate_lock_rule_versions" EntitySet="rate_lock_rule_versions" />
+            <End Role="rate_lock_folders" EntitySet="rate_lock_folders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rate_lock_folders_rule_type" Association="Self.FK_rate_lock_folders_rule_type">
+            <End Role="rate_lock_rule_types" EntitySet="rate_lock_rule_types" />
+            <End Role="rate_lock_folders" EntitySet="rate_lock_folders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rate_lock_notifications_color_id" Association="Self.FK_rate_lock_notifications_color_id">
+            <End Role="rate_lock_colors" EntitySet="rate_lock_colors" />
+            <End Role="rate_lock_notifications" EntitySet="rate_lock_notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rate_lock_period_rules_rate_lock_rule_groups" Association="Self.FK_rate_lock_period_rules_rate_lock_rule_groups">
+            <End Role="rate_lock_rule_groups" EntitySet="rate_lock_rule_groups" />
+            <End Role="rate_lock_period_rules" EntitySet="rate_lock_period_rules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rate_lock_pricing_sheet_values_rate_lock_pricing_sheet" Association="Self.FK_rate_lock_pricing_sheet_values_rate_lock_pricing_sheet">
+            <End Role="rate_lock_pricing_sheet" EntitySet="rate_lock_pricing_sheet" />
+            <End Role="rate_lock_pricing_sheet_values" EntitySet="rate_lock_pricing_sheet_values" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rate_lock_rule_group_folder_id" Association="Self.FK_rate_lock_rule_group_folder_id">
+            <End Role="rate_lock_folders" EntitySet="rate_lock_folders" />
+            <End Role="rate_lock_rule_groups" EntitySet="rate_lock_rule_groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rate_lock_rule_values_rate_lock_rules" Association="Self.FK_rate_lock_rule_values_rate_lock_rules">
+            <End Role="rate_lock_rules" EntitySet="rate_lock_rules" />
+            <End Role="rate_lock_rule_values" EntitySet="rate_lock_rule_values" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rate_lock_rules_group_id" Association="Self.FK_rate_lock_rules_group_id">
+            <End Role="rate_lock_rule_groups" EntitySet="rate_lock_rule_groups" />
+            <End Role="rate_lock_rules" EntitySet="rate_lock_rules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rate_lock_rules_operator_id" Association="Self.FK_rate_lock_rules_operator_id">
+            <End Role="rate_lock_operators" EntitySet="rate_lock_operators" />
+            <End Role="rate_lock_rules" EntitySet="rate_lock_rules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rate_lock_rules_rate_lock_fields" Association="Self.FK_rate_lock_rules_rate_lock_fields">
+            <End Role="rate_lock_fields" EntitySet="rate_lock_fields" />
+            <End Role="rate_lock_rules" EntitySet="rate_lock_rules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rate_locks_rate_lock_cluster_id" Association="Self.FK_rate_locks_rate_lock_cluster_id">
+            <End Role="rate_lock_clusters" EntitySet="rate_lock_clusters" />
+            <End Role="rate_locks" EntitySet="rate_locks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rate_locks_rate_lock_pricing_sheet_id" Association="Self.FK_rate_locks_rate_lock_pricing_sheet_id">
+            <End Role="rate_lock_pricing_sheet" EntitySet="rate_lock_pricing_sheet" />
+            <End Role="rate_locks" EntitySet="rate_locks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rate_locks_rate_lock_rule_version_id" Association="Self.FK_rate_locks_rate_lock_rule_version_id">
+            <End Role="rate_lock_rule_versions" EntitySet="rate_lock_rule_versions" />
+            <End Role="rate_locks" EntitySet="rate_locks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rate_locks_rate_lock_status_id" Association="Self.FK_rate_locks_rate_lock_status_id">
+            <End Role="rate_lock_statuses" EntitySet="rate_lock_statuses" />
+            <End Role="rate_locks" EntitySet="rate_locks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rate_locks_rate_lock_type_id" Association="Self.FK_rate_locks_rate_lock_type_id">
+            <End Role="rate_lock_types" EntitySet="rate_lock_types" />
+            <End Role="rate_locks" EntitySet="rate_locks" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RateLockModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="rate_lock_cluster_divisions">
+          <Key>
+            <PropertyRef Name="division_id" />
+          </Key>
+          <Property Name="division_id" Type="Byte" Nullable="false" />
+          <Property Name="rate_lock_cluster_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="rate_lock_clusters" Relationship="Self.FK_rate_lock_cluster_divisions_cluster_id" FromRole="rate_lock_cluster_divisions" ToRole="rate_lock_clusters" />
+        </EntityType>
+        <EntityType Name="rate_lock_cluster_history">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rate_lock_cluster_id" Type="Int32" Nullable="false" />
+          <Property Name="division_id" Type="Byte" Nullable="false" />
+          <Property Name="action" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="rate_lock_clusters" Relationship="Self.FK_rate_lock_cluster_history_rate_lock_cluster" FromRole="rate_lock_cluster_history" ToRole="rate_lock_clusters" />
+        </EntityType>
+        <EntityType Name="rate_lock_cluster_rules">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rate_lock_rule_group_id" Type="Int32" Nullable="false" />
+          <Property Name="rate_lock_cluster_id" Type="Int32" Nullable="false" />
+          <Property Name="value" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="rate_lock_clusters" Relationship="Self.FK_rate_lock_cluster_rules_cluster_id" FromRole="rate_lock_cluster_rules" ToRole="rate_lock_clusters" />
+          <NavigationProperty Name="rate_lock_rule_groups" Relationship="Self.FK_rate_lock_cluster_rules_group_id" FromRole="rate_lock_cluster_rules" ToRole="rate_lock_rule_groups" />
+        </EntityType>
+        <EntityType Name="rate_lock_clusters">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="rate_lock_cluster_divisions" Relationship="Self.FK_rate_lock_cluster_divisions_cluster_id" FromRole="rate_lock_clusters" ToRole="rate_lock_cluster_divisions" />
+          <NavigationProperty Name="rate_lock_cluster_history" Relationship="Self.FK_rate_lock_cluster_history_rate_lock_cluster" FromRole="rate_lock_clusters" ToRole="rate_lock_cluster_history" />
+          <NavigationProperty Name="rate_lock_cluster_rules" Relationship="Self.FK_rate_lock_cluster_rules_cluster_id" FromRole="rate_lock_clusters" ToRole="rate_lock_cluster_rules" />
+          <NavigationProperty Name="rate_locks" Relationship="Self.FK_rate_locks_rate_lock_cluster_id" FromRole="rate_lock_clusters" ToRole="rate_locks" />
+        </EntityType>
+        <EntityType Name="rate_lock_colors">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="hex_code" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="rate_lock_notifications" Relationship="Self.FK_rate_lock_notifications_color_id" FromRole="rate_lock_colors" ToRole="rate_lock_notifications" />
+        </EntityType>
+        <EntityType Name="rate_lock_datatype_operators">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rate_lock_datatype_id" Type="Byte" Nullable="false" />
+          <Property Name="rate_lock_operator_id" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="rate_lock_datatypes" Relationship="Self.FK_rate_lock_datatype_operators_rate_lock_datatype" FromRole="rate_lock_datatype_operators" ToRole="rate_lock_datatypes" />
+          <NavigationProperty Name="rate_lock_operators" Relationship="Self.FK_rate_lock_datatype_operators_rate_lock_operators" FromRole="rate_lock_datatype_operators" ToRole="rate_lock_operators" />
+        </EntityType>
+        <EntityType Name="rate_lock_datatypes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="rate_lock_datatype_operators" Relationship="Self.FK_rate_lock_datatype_operators_rate_lock_datatype" FromRole="rate_lock_datatypes" ToRole="rate_lock_datatype_operators" />
+          <NavigationProperty Name="rate_lock_fields" Relationship="Self.FK_rate_lock_fields_rate_lock_datatypes" FromRole="rate_lock_datatypes" ToRole="rate_lock_fields" />
+        </EntityType>
+        <EntityType Name="rate_lock_encompass_statuses">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="rate_locks" Relationship="Self.FK_rate_lock_encompass_status_id" FromRole="rate_lock_encompass_statuses" ToRole="rate_locks" />
+        </EntityType>
+        <EntityType Name="rate_lock_field_options">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Byte" Nullable="false" />
+          <Property Name="field_id" Type="Byte" Nullable="false" />
+          <Property Name="value" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="rate_lock_fields" Relationship="Self.FK_rate_lock_field_options_rate_lock_fields" FromRole="rate_lock_field_options" ToRole="rate_lock_fields" />
+        </EntityType>
+        <EntityType Name="rate_lock_fields">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="display_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rate_lock_datatype_id" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="rate_lock_datatypes" Relationship="Self.FK_rate_lock_fields_rate_lock_datatypes" FromRole="rate_lock_fields" ToRole="rate_lock_datatypes" />
+          <NavigationProperty Name="rate_lock_field_options" Relationship="Self.FK_rate_lock_field_options_rate_lock_fields" FromRole="rate_lock_fields" ToRole="rate_lock_field_options" />
+          <NavigationProperty Name="rate_lock_rules" Relationship="Self.FK_rate_lock_rules_rate_lock_fields" FromRole="rate_lock_fields" ToRole="rate_lock_rules" />
+        </EntityType>
+        <EntityType Name="rate_lock_folders">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rate_lock_rule_type_id" Type="Byte" Nullable="false" />
+          <Property Name="rate_lock_rule_version_id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="rate_lock_rule_versions" Relationship="Self.FK_rate_lock_folders_rate_lock_rule_versions" FromRole="rate_lock_folders" ToRole="rate_lock_rule_versions" />
+          <NavigationProperty Name="rate_lock_rule_types" Relationship="Self.FK_rate_lock_folders_rule_type" FromRole="rate_lock_folders" ToRole="rate_lock_rule_types" />
+          <NavigationProperty Name="rate_lock_rule_groups" Relationship="Self.FK_rate_lock_rule_group_folder_id" FromRole="rate_lock_folders" ToRole="rate_lock_rule_groups" />
+        </EntityType>
+        <EntityType Name="rate_lock_import_history">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="old_rate_lock_id" Type="Int32" Nullable="false" />
+          <Property Name="new_rate_lock_id" Type="Int32" Nullable="false" />
+          <Property Name="import_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="imported_by" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="rate_locks" Relationship="Self.FK_new_rate_lock_import_history_rate_locks" FromRole="rate_lock_import_history" ToRole="rate_locks" />
+          <NavigationProperty Name="rate_locks1" Relationship="Self.FK_old_rate_lock_import_history_rate_locks" FromRole="rate_lock_import_history" ToRole="rate_locks" />
+        </EntityType>
+        <EntityType Name="rate_lock_loan_info">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="field" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="value" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rate_lock_id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rate_lock_manual_product_codes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="product_code_id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rate_lock_manual_product_codes_history">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="product_codes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rate_lock_notifications">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="color_id" Type="Byte" Nullable="false" />
+          <Property Name="message" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="rate_lock_colors" Relationship="Self.FK_rate_lock_notifications_color_id" FromRole="rate_lock_notifications" ToRole="rate_lock_colors" />
+        </EntityType>
+        <EntityType Name="rate_lock_operators">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="operator" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="rate_lock_datatype_operators" Relationship="Self.FK_rate_lock_datatype_operators_rate_lock_operators" FromRole="rate_lock_operators" ToRole="rate_lock_datatype_operators" />
+          <NavigationProperty Name="rate_lock_rules" Relationship="Self.FK_rate_lock_rules_operator_id" FromRole="rate_lock_operators" ToRole="rate_lock_rules" />
+        </EntityType>
+        <EntityType Name="rate_lock_period_rules">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rate_lock_rule_group_id" Type="Int32" Nullable="false" />
+          <Property Name="lock_period" Type="Byte" Nullable="false" />
+          <Property Name="is_available" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="rate_lock_rule_groups" Relationship="Self.FK_rate_lock_period_rules_rate_lock_rule_groups" FromRole="rate_lock_period_rules" ToRole="rate_lock_rule_groups" />
+        </EntityType>
+        <EntityType Name="rate_lock_pricing_sheet">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="rate_lock_pricing_sheet_values" Relationship="Self.FK_rate_lock_pricing_sheet_values_rate_lock_pricing_sheet" FromRole="rate_lock_pricing_sheet" ToRole="rate_lock_pricing_sheet_values" />
+          <NavigationProperty Name="rate_locks" Relationship="Self.FK_rate_locks_rate_lock_pricing_sheet_id" FromRole="rate_lock_pricing_sheet" ToRole="rate_locks" />
+        </EntityType>
+        <EntityType Name="rate_lock_pricing_sheet_values">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rate_lock_pricing_sheet_product_id" Type="Int32" Nullable="false" />
+          <Property Name="call_center_price" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="branch_price" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rate_lock_pricing_sheet_id" Type="Int32" Nullable="false" />
+          <Property Name="lock_period" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="investor_pricing" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="srp" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="rate_lock_pricing_sheet" Relationship="Self.FK_rate_lock_pricing_sheet_values_rate_lock_pricing_sheet" FromRole="rate_lock_pricing_sheet_values" ToRole="rate_lock_pricing_sheet" />
+        </EntityType>
+        <EntityType Name="rate_lock_reporting_fields">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rate_lock_rule_groups">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="header" Type="Boolean" Nullable="false" />
+          <Property Name="is_hidden" Type="Boolean" Nullable="false" />
+          <Property Name="rate_lock_folder_id" Type="Int32" Nullable="false" />
+          <Property Name="does_affect_target_profit" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="rate_lock_cluster_rules" Relationship="Self.FK_rate_lock_cluster_rules_group_id" FromRole="rate_lock_rule_groups" ToRole="rate_lock_cluster_rules" />
+          <NavigationProperty Name="rate_lock_folders" Relationship="Self.FK_rate_lock_rule_group_folder_id" FromRole="rate_lock_rule_groups" ToRole="rate_lock_folders" />
+          <NavigationProperty Name="rate_lock_period_rules" Relationship="Self.FK_rate_lock_period_rules_rate_lock_rule_groups" FromRole="rate_lock_rule_groups" ToRole="rate_lock_period_rules" />
+          <NavigationProperty Name="rate_lock_rules" Relationship="Self.FK_rate_lock_rules_group_id" FromRole="rate_lock_rule_groups" ToRole="rate_lock_rules" />
+        </EntityType>
+        <EntityType Name="rate_lock_rule_types">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="rate_lock_folders" Relationship="Self.FK_rate_lock_folders_rule_type" FromRole="rate_lock_rule_types" ToRole="rate_lock_folders" />
+        </EntityType>
+        <EntityType Name="rate_lock_rule_values">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="rate_lock_rule_id" Type="Int32" Nullable="false" />
+          <Property Name="value" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="rate_lock_rules" Relationship="Self.FK_rate_lock_rule_values_rate_lock_rules" FromRole="rate_lock_rule_values" ToRole="rate_lock_rules" />
+        </EntityType>
+        <EntityType Name="rate_lock_rule_versions">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="rate_lock_folders" Relationship="Self.FK_rate_lock_folders_rate_lock_rule_versions" FromRole="rate_lock_rule_versions" ToRole="rate_lock_folders" />
+          <NavigationProperty Name="rate_locks" Relationship="Self.FK_rate_locks_rate_lock_rule_version_id" FromRole="rate_lock_rule_versions" ToRole="rate_locks" />
+        </EntityType>
+        <EntityType Name="rate_lock_rules">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rate_lock_rule_group_id" Type="Int32" Nullable="false" />
+          <Property Name="rate_lock_field_id" Type="Byte" Nullable="false" />
+          <Property Name="rate_lock_operator_id" Type="Byte" Nullable="false" />
+          <Property Name="compare_value" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="rate_lock_fields" Relationship="Self.FK_rate_lock_rules_rate_lock_fields" FromRole="rate_lock_rules" ToRole="rate_lock_fields" />
+          <NavigationProperty Name="rate_lock_operators" Relationship="Self.FK_rate_lock_rules_operator_id" FromRole="rate_lock_rules" ToRole="rate_lock_operators" />
+          <NavigationProperty Name="rate_lock_rule_groups" Relationship="Self.FK_rate_lock_rules_group_id" FromRole="rate_lock_rules" ToRole="rate_lock_rule_groups" />
+          <NavigationProperty Name="rate_lock_rule_values" Relationship="Self.FK_rate_lock_rule_values_rate_lock_rules" FromRole="rate_lock_rules" ToRole="rate_lock_rule_values" />
+        </EntityType>
+        <EntityType Name="rate_lock_statuses">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="rate_locks" Relationship="Self.FK_rate_locks_rate_lock_status_id" FromRole="rate_lock_statuses" ToRole="rate_locks" />
+        </EntityType>
+        <EntityType Name="rate_lock_super_users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rate_lock_types">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="rate_locks" Relationship="Self.FK_rate_locks_rate_lock_type_id" FromRole="rate_lock_types" ToRole="rate_locks" />
+        </EntityType>
+        <EntityType Name="rate_lock_uploads">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="contents" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rate_locks">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="loan_id" Type="Int32" Nullable="false" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="rate" Type="Decimal" Precision="7" Scale="5" Nullable="false" />
+          <Property Name="period" Type="Int32" Nullable="false" />
+          <Property Name="lock_duration" Type="Int32" Nullable="false" />
+          <Property Name="rate_lock_status_id" Type="Byte" Nullable="false" />
+          <Property Name="rate_lock_type_id" Type="Byte" Nullable="false" />
+          <Property Name="rate_lock_pricing_sheet_id" Type="Int32" Nullable="false" />
+          <Property Name="rate_lock_rule_version_id" Type="Int32" Nullable="false" />
+          <Property Name="rate_lock_cluster_id" Type="Int32" Nullable="false" />
+          <Property Name="undiscounted_rate" Type="Decimal" Precision="7" Scale="5" Nullable="false" />
+          <Property Name="base_price" Type="Decimal" Precision="6" Scale="3" Nullable="false" />
+          <Property Name="adjusted_price" Type="Decimal" Precision="6" Scale="3" Nullable="false" />
+          <Property Name="expiration_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="days_extended" Type="Int32" />
+          <Property Name="extension_cost" Type="Decimal" Precision="5" Scale="3" />
+          <Property Name="product_code" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="discount_paid_by_borrower" Type="Decimal" Precision="6" Scale="3" />
+          <Property Name="exception_category" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="exception_note" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="cancel_date" Type="DateTime" Precision="3" />
+          <Property Name="cancelled_by" Type="Int32" />
+          <Property Name="investor_pricing" Type="Decimal" Precision="15" Scale="11" Nullable="false" />
+          <Property Name="srp" Type="Decimal" Precision="15" Scale="13" Nullable="false" />
+          <Property Name="update_to_encompass_status_id" Type="Byte" Nullable="false" />
+          <Property Name="is_branch" Type="Boolean" />
+          <NavigationProperty Name="rate_lock_clusters" Relationship="Self.FK_rate_locks_rate_lock_cluster_id" FromRole="rate_locks" ToRole="rate_lock_clusters" />
+          <NavigationProperty Name="rate_lock_encompass_statuses" Relationship="Self.FK_rate_lock_encompass_status_id" FromRole="rate_locks" ToRole="rate_lock_encompass_statuses" />
+          <NavigationProperty Name="rate_lock_import_history" Relationship="Self.FK_new_rate_lock_import_history_rate_locks" FromRole="rate_locks" ToRole="rate_lock_import_history" />
+          <NavigationProperty Name="rate_lock_import_history1" Relationship="Self.FK_old_rate_lock_import_history_rate_locks" FromRole="rate_locks" ToRole="rate_lock_import_history" />
+          <NavigationProperty Name="rate_lock_pricing_sheet" Relationship="Self.FK_rate_locks_rate_lock_pricing_sheet_id" FromRole="rate_locks" ToRole="rate_lock_pricing_sheet" />
+          <NavigationProperty Name="rate_lock_rule_versions" Relationship="Self.FK_rate_locks_rate_lock_rule_version_id" FromRole="rate_locks" ToRole="rate_lock_rule_versions" />
+          <NavigationProperty Name="rate_lock_statuses" Relationship="Self.FK_rate_locks_rate_lock_status_id" FromRole="rate_locks" ToRole="rate_lock_statuses" />
+          <NavigationProperty Name="rate_lock_types" Relationship="Self.FK_rate_locks_rate_lock_type_id" FromRole="rate_locks" ToRole="rate_lock_types" />
+        </EntityType>
+        <Association Name="FK_rate_lock_cluster_divisions_cluster_id">
+          <End Role="rate_lock_clusters" Type="Self.rate_lock_clusters" Multiplicity="1" />
+          <End Role="rate_lock_cluster_divisions" Type="Self.rate_lock_cluster_divisions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rate_lock_clusters">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate_lock_cluster_divisions">
+              <PropertyRef Name="rate_lock_cluster_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rate_lock_cluster_history_rate_lock_cluster">
+          <End Role="rate_lock_clusters" Type="Self.rate_lock_clusters" Multiplicity="1" />
+          <End Role="rate_lock_cluster_history" Type="Self.rate_lock_cluster_history" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rate_lock_clusters">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate_lock_cluster_history">
+              <PropertyRef Name="rate_lock_cluster_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rate_lock_cluster_rules_cluster_id">
+          <End Role="rate_lock_clusters" Type="Self.rate_lock_clusters" Multiplicity="1" />
+          <End Role="rate_lock_cluster_rules" Type="Self.rate_lock_cluster_rules" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rate_lock_clusters">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate_lock_cluster_rules">
+              <PropertyRef Name="rate_lock_cluster_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rate_lock_cluster_rules_group_id">
+          <End Role="rate_lock_rule_groups" Type="Self.rate_lock_rule_groups" Multiplicity="1" />
+          <End Role="rate_lock_cluster_rules" Type="Self.rate_lock_cluster_rules" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rate_lock_rule_groups">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate_lock_cluster_rules">
+              <PropertyRef Name="rate_lock_rule_group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rate_locks_rate_lock_cluster_id">
+          <End Role="rate_lock_clusters" Type="Self.rate_lock_clusters" Multiplicity="1" />
+          <End Role="rate_locks" Type="Self.rate_locks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rate_lock_clusters">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate_locks">
+              <PropertyRef Name="rate_lock_cluster_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rate_lock_notifications_color_id">
+          <End Role="rate_lock_colors" Type="Self.rate_lock_colors" Multiplicity="1" />
+          <End Role="rate_lock_notifications" Type="Self.rate_lock_notifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rate_lock_colors">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate_lock_notifications">
+              <PropertyRef Name="color_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rate_lock_datatype_operators_rate_lock_datatype">
+          <End Role="rate_lock_datatypes" Type="Self.rate_lock_datatypes" Multiplicity="1" />
+          <End Role="rate_lock_datatype_operators" Type="Self.rate_lock_datatype_operators" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rate_lock_datatypes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate_lock_datatype_operators">
+              <PropertyRef Name="rate_lock_datatype_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rate_lock_datatype_operators_rate_lock_operators">
+          <End Role="rate_lock_operators" Type="Self.rate_lock_operators" Multiplicity="1" />
+          <End Role="rate_lock_datatype_operators" Type="Self.rate_lock_datatype_operators" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rate_lock_operators">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate_lock_datatype_operators">
+              <PropertyRef Name="rate_lock_operator_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rate_lock_fields_rate_lock_datatypes">
+          <End Role="rate_lock_datatypes" Type="Self.rate_lock_datatypes" Multiplicity="1" />
+          <End Role="rate_lock_fields" Type="Self.rate_lock_fields" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rate_lock_datatypes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate_lock_fields">
+              <PropertyRef Name="rate_lock_datatype_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rate_lock_encompass_status_id">
+          <End Role="rate_lock_encompass_statuses" Type="Self.rate_lock_encompass_statuses" Multiplicity="1" />
+          <End Role="rate_locks" Type="Self.rate_locks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rate_lock_encompass_statuses">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate_locks">
+              <PropertyRef Name="update_to_encompass_status_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rate_lock_field_options_rate_lock_fields">
+          <End Role="rate_lock_fields" Type="Self.rate_lock_fields" Multiplicity="1" />
+          <End Role="rate_lock_field_options" Type="Self.rate_lock_field_options" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rate_lock_fields">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate_lock_field_options">
+              <PropertyRef Name="field_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rate_lock_rules_rate_lock_fields">
+          <End Role="rate_lock_fields" Type="Self.rate_lock_fields" Multiplicity="1" />
+          <End Role="rate_lock_rules" Type="Self.rate_lock_rules" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rate_lock_fields">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate_lock_rules">
+              <PropertyRef Name="rate_lock_field_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rate_lock_folders_rate_lock_rule_versions">
+          <End Role="rate_lock_rule_versions" Type="Self.rate_lock_rule_versions" Multiplicity="1" />
+          <End Role="rate_lock_folders" Type="Self.rate_lock_folders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rate_lock_rule_versions">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate_lock_folders">
+              <PropertyRef Name="rate_lock_rule_version_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rate_lock_folders_rule_type">
+          <End Role="rate_lock_rule_types" Type="Self.rate_lock_rule_types" Multiplicity="1" />
+          <End Role="rate_lock_folders" Type="Self.rate_lock_folders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rate_lock_rule_types">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate_lock_folders">
+              <PropertyRef Name="rate_lock_rule_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rate_lock_rule_group_folder_id">
+          <End Role="rate_lock_folders" Type="Self.rate_lock_folders" Multiplicity="1" />
+          <End Role="rate_lock_rule_groups" Type="Self.rate_lock_rule_groups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rate_lock_folders">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate_lock_rule_groups">
+              <PropertyRef Name="rate_lock_folder_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_new_rate_lock_import_history_rate_locks">
+          <End Role="rate_locks" Type="Self.rate_locks" Multiplicity="1" />
+          <End Role="rate_lock_import_history" Type="Self.rate_lock_import_history" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rate_locks">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate_lock_import_history">
+              <PropertyRef Name="new_rate_lock_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_old_rate_lock_import_history_rate_locks">
+          <End Role="rate_locks" Type="Self.rate_locks" Multiplicity="1" />
+          <End Role="rate_lock_import_history" Type="Self.rate_lock_import_history" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rate_locks">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate_lock_import_history">
+              <PropertyRef Name="old_rate_lock_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rate_lock_rules_operator_id">
+          <End Role="rate_lock_operators" Type="Self.rate_lock_operators" Multiplicity="1" />
+          <End Role="rate_lock_rules" Type="Self.rate_lock_rules" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rate_lock_operators">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate_lock_rules">
+              <PropertyRef Name="rate_lock_operator_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rate_lock_period_rules_rate_lock_rule_groups">
+          <End Role="rate_lock_rule_groups" Type="Self.rate_lock_rule_groups" Multiplicity="1" />
+          <End Role="rate_lock_period_rules" Type="Self.rate_lock_period_rules" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rate_lock_rule_groups">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate_lock_period_rules">
+              <PropertyRef Name="rate_lock_rule_group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rate_lock_pricing_sheet_values_rate_lock_pricing_sheet">
+          <End Role="rate_lock_pricing_sheet" Type="Self.rate_lock_pricing_sheet" Multiplicity="1" />
+          <End Role="rate_lock_pricing_sheet_values" Type="Self.rate_lock_pricing_sheet_values" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rate_lock_pricing_sheet">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate_lock_pricing_sheet_values">
+              <PropertyRef Name="rate_lock_pricing_sheet_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rate_locks_rate_lock_pricing_sheet_id">
+          <End Role="rate_lock_pricing_sheet" Type="Self.rate_lock_pricing_sheet" Multiplicity="1" />
+          <End Role="rate_locks" Type="Self.rate_locks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rate_lock_pricing_sheet">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate_locks">
+              <PropertyRef Name="rate_lock_pricing_sheet_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rate_lock_rules_group_id">
+          <End Role="rate_lock_rule_groups" Type="Self.rate_lock_rule_groups" Multiplicity="1" />
+          <End Role="rate_lock_rules" Type="Self.rate_lock_rules" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rate_lock_rule_groups">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate_lock_rules">
+              <PropertyRef Name="rate_lock_rule_group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rate_lock_rule_values_rate_lock_rules">
+          <End Role="rate_lock_rules" Type="Self.rate_lock_rules" Multiplicity="1" />
+          <End Role="rate_lock_rule_values" Type="Self.rate_lock_rule_values" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rate_lock_rules">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate_lock_rule_values">
+              <PropertyRef Name="rate_lock_rule_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rate_locks_rate_lock_rule_version_id">
+          <End Role="rate_lock_rule_versions" Type="Self.rate_lock_rule_versions" Multiplicity="1" />
+          <End Role="rate_locks" Type="Self.rate_locks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rate_lock_rule_versions">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate_locks">
+              <PropertyRef Name="rate_lock_rule_version_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rate_locks_rate_lock_status_id">
+          <End Role="rate_lock_statuses" Type="Self.rate_lock_statuses" Multiplicity="1" />
+          <End Role="rate_locks" Type="Self.rate_locks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rate_lock_statuses">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate_locks">
+              <PropertyRef Name="rate_lock_status_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rate_locks_rate_lock_type_id">
+          <End Role="rate_lock_types" Type="Self.rate_lock_types" Multiplicity="1" />
+          <End Role="rate_locks" Type="Self.rate_locks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rate_lock_types">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate_locks">
+              <PropertyRef Name="rate_lock_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CrawfishEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="rate_lock_cluster_divisions" EntityType="Self.rate_lock_cluster_divisions" />
+          <EntitySet Name="rate_lock_cluster_history" EntityType="Self.rate_lock_cluster_history" />
+          <EntitySet Name="rate_lock_cluster_rules" EntityType="Self.rate_lock_cluster_rules" />
+          <EntitySet Name="rate_lock_clusters" EntityType="Self.rate_lock_clusters" />
+          <EntitySet Name="rate_lock_colors" EntityType="Self.rate_lock_colors" />
+          <EntitySet Name="rate_lock_datatype_operators" EntityType="Self.rate_lock_datatype_operators" />
+          <EntitySet Name="rate_lock_datatypes" EntityType="Self.rate_lock_datatypes" />
+          <EntitySet Name="rate_lock_encompass_statuses" EntityType="Self.rate_lock_encompass_statuses" />
+          <EntitySet Name="rate_lock_field_options" EntityType="Self.rate_lock_field_options" />
+          <EntitySet Name="rate_lock_fields" EntityType="Self.rate_lock_fields" />
+          <EntitySet Name="rate_lock_folders" EntityType="Self.rate_lock_folders" />
+          <EntitySet Name="rate_lock_import_history" EntityType="Self.rate_lock_import_history" />
+          <EntitySet Name="rate_lock_loan_info" EntityType="Self.rate_lock_loan_info" />
+          <EntitySet Name="rate_lock_manual_product_codes" EntityType="Self.rate_lock_manual_product_codes" />
+          <EntitySet Name="rate_lock_manual_product_codes_history" EntityType="Self.rate_lock_manual_product_codes_history" />
+          <EntitySet Name="rate_lock_notifications" EntityType="Self.rate_lock_notifications" />
+          <EntitySet Name="rate_lock_operators" EntityType="Self.rate_lock_operators" />
+          <EntitySet Name="rate_lock_period_rules" EntityType="Self.rate_lock_period_rules" />
+          <EntitySet Name="rate_lock_pricing_sheet" EntityType="Self.rate_lock_pricing_sheet" />
+          <EntitySet Name="rate_lock_pricing_sheet_values" EntityType="Self.rate_lock_pricing_sheet_values" />
+          <EntitySet Name="rate_lock_reporting_fields" EntityType="Self.rate_lock_reporting_fields" />
+          <EntitySet Name="rate_lock_rule_groups" EntityType="Self.rate_lock_rule_groups" />
+          <EntitySet Name="rate_lock_rule_types" EntityType="Self.rate_lock_rule_types" />
+          <EntitySet Name="rate_lock_rule_values" EntityType="Self.rate_lock_rule_values" />
+          <EntitySet Name="rate_lock_rule_versions" EntityType="Self.rate_lock_rule_versions" />
+          <EntitySet Name="rate_lock_rules" EntityType="Self.rate_lock_rules" />
+          <EntitySet Name="rate_lock_statuses" EntityType="Self.rate_lock_statuses" />
+          <EntitySet Name="rate_lock_super_users" EntityType="Self.rate_lock_super_users" />
+          <EntitySet Name="rate_lock_types" EntityType="Self.rate_lock_types" />
+          <EntitySet Name="rate_lock_uploads" EntityType="Self.rate_lock_uploads" />
+          <EntitySet Name="rate_locks" EntityType="Self.rate_locks" />
+          <AssociationSet Name="FK_rate_lock_cluster_divisions_cluster_id" Association="Self.FK_rate_lock_cluster_divisions_cluster_id">
+            <End Role="rate_lock_clusters" EntitySet="rate_lock_clusters" />
+            <End Role="rate_lock_cluster_divisions" EntitySet="rate_lock_cluster_divisions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rate_lock_cluster_history_rate_lock_cluster" Association="Self.FK_rate_lock_cluster_history_rate_lock_cluster">
+            <End Role="rate_lock_clusters" EntitySet="rate_lock_clusters" />
+            <End Role="rate_lock_cluster_history" EntitySet="rate_lock_cluster_history" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rate_lock_cluster_rules_cluster_id" Association="Self.FK_rate_lock_cluster_rules_cluster_id">
+            <End Role="rate_lock_clusters" EntitySet="rate_lock_clusters" />
+            <End Role="rate_lock_cluster_rules" EntitySet="rate_lock_cluster_rules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rate_lock_cluster_rules_group_id" Association="Self.FK_rate_lock_cluster_rules_group_id">
+            <End Role="rate_lock_rule_groups" EntitySet="rate_lock_rule_groups" />
+            <End Role="rate_lock_cluster_rules" EntitySet="rate_lock_cluster_rules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rate_locks_rate_lock_cluster_id" Association="Self.FK_rate_locks_rate_lock_cluster_id">
+            <End Role="rate_lock_clusters" EntitySet="rate_lock_clusters" />
+            <End Role="rate_locks" EntitySet="rate_locks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rate_lock_notifications_color_id" Association="Self.FK_rate_lock_notifications_color_id">
+            <End Role="rate_lock_colors" EntitySet="rate_lock_colors" />
+            <End Role="rate_lock_notifications" EntitySet="rate_lock_notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rate_lock_datatype_operators_rate_lock_datatype" Association="Self.FK_rate_lock_datatype_operators_rate_lock_datatype">
+            <End Role="rate_lock_datatypes" EntitySet="rate_lock_datatypes" />
+            <End Role="rate_lock_datatype_operators" EntitySet="rate_lock_datatype_operators" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rate_lock_datatype_operators_rate_lock_operators" Association="Self.FK_rate_lock_datatype_operators_rate_lock_operators">
+            <End Role="rate_lock_operators" EntitySet="rate_lock_operators" />
+            <End Role="rate_lock_datatype_operators" EntitySet="rate_lock_datatype_operators" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rate_lock_fields_rate_lock_datatypes" Association="Self.FK_rate_lock_fields_rate_lock_datatypes">
+            <End Role="rate_lock_datatypes" EntitySet="rate_lock_datatypes" />
+            <End Role="rate_lock_fields" EntitySet="rate_lock_fields" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rate_lock_encompass_status_id" Association="Self.FK_rate_lock_encompass_status_id">
+            <End Role="rate_lock_encompass_statuses" EntitySet="rate_lock_encompass_statuses" />
+            <End Role="rate_locks" EntitySet="rate_locks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rate_lock_field_options_rate_lock_fields" Association="Self.FK_rate_lock_field_options_rate_lock_fields">
+            <End Role="rate_lock_fields" EntitySet="rate_lock_fields" />
+            <End Role="rate_lock_field_options" EntitySet="rate_lock_field_options" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rate_lock_rules_rate_lock_fields" Association="Self.FK_rate_lock_rules_rate_lock_fields">
+            <End Role="rate_lock_fields" EntitySet="rate_lock_fields" />
+            <End Role="rate_lock_rules" EntitySet="rate_lock_rules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rate_lock_folders_rate_lock_rule_versions" Association="Self.FK_rate_lock_folders_rate_lock_rule_versions">
+            <End Role="rate_lock_rule_versions" EntitySet="rate_lock_rule_versions" />
+            <End Role="rate_lock_folders" EntitySet="rate_lock_folders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rate_lock_folders_rule_type" Association="Self.FK_rate_lock_folders_rule_type">
+            <End Role="rate_lock_rule_types" EntitySet="rate_lock_rule_types" />
+            <End Role="rate_lock_folders" EntitySet="rate_lock_folders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rate_lock_rule_group_folder_id" Association="Self.FK_rate_lock_rule_group_folder_id">
+            <End Role="rate_lock_folders" EntitySet="rate_lock_folders" />
+            <End Role="rate_lock_rule_groups" EntitySet="rate_lock_rule_groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_new_rate_lock_import_history_rate_locks" Association="Self.FK_new_rate_lock_import_history_rate_locks">
+            <End Role="rate_locks" EntitySet="rate_locks" />
+            <End Role="rate_lock_import_history" EntitySet="rate_lock_import_history" />
+          </AssociationSet>
+          <AssociationSet Name="FK_old_rate_lock_import_history_rate_locks" Association="Self.FK_old_rate_lock_import_history_rate_locks">
+            <End Role="rate_locks" EntitySet="rate_locks" />
+            <End Role="rate_lock_import_history" EntitySet="rate_lock_import_history" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rate_lock_rules_operator_id" Association="Self.FK_rate_lock_rules_operator_id">
+            <End Role="rate_lock_operators" EntitySet="rate_lock_operators" />
+            <End Role="rate_lock_rules" EntitySet="rate_lock_rules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rate_lock_period_rules_rate_lock_rule_groups" Association="Self.FK_rate_lock_period_rules_rate_lock_rule_groups">
+            <End Role="rate_lock_rule_groups" EntitySet="rate_lock_rule_groups" />
+            <End Role="rate_lock_period_rules" EntitySet="rate_lock_period_rules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rate_lock_pricing_sheet_values_rate_lock_pricing_sheet" Association="Self.FK_rate_lock_pricing_sheet_values_rate_lock_pricing_sheet">
+            <End Role="rate_lock_pricing_sheet" EntitySet="rate_lock_pricing_sheet" />
+            <End Role="rate_lock_pricing_sheet_values" EntitySet="rate_lock_pricing_sheet_values" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rate_locks_rate_lock_pricing_sheet_id" Association="Self.FK_rate_locks_rate_lock_pricing_sheet_id">
+            <End Role="rate_lock_pricing_sheet" EntitySet="rate_lock_pricing_sheet" />
+            <End Role="rate_locks" EntitySet="rate_locks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rate_lock_rules_group_id" Association="Self.FK_rate_lock_rules_group_id">
+            <End Role="rate_lock_rule_groups" EntitySet="rate_lock_rule_groups" />
+            <End Role="rate_lock_rules" EntitySet="rate_lock_rules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rate_lock_rule_values_rate_lock_rules" Association="Self.FK_rate_lock_rule_values_rate_lock_rules">
+            <End Role="rate_lock_rules" EntitySet="rate_lock_rules" />
+            <End Role="rate_lock_rule_values" EntitySet="rate_lock_rule_values" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rate_locks_rate_lock_rule_version_id" Association="Self.FK_rate_locks_rate_lock_rule_version_id">
+            <End Role="rate_lock_rule_versions" EntitySet="rate_lock_rule_versions" />
+            <End Role="rate_locks" EntitySet="rate_locks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rate_locks_rate_lock_status_id" Association="Self.FK_rate_locks_rate_lock_status_id">
+            <End Role="rate_lock_statuses" EntitySet="rate_lock_statuses" />
+            <End Role="rate_locks" EntitySet="rate_locks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rate_locks_rate_lock_type_id" Association="Self.FK_rate_locks_rate_lock_type_id">
+            <End Role="rate_lock_types" EntitySet="rate_lock_types" />
+            <End Role="rate_locks" EntitySet="rate_locks" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RateLockModelStoreContainer" CdmEntityContainer="CrawfishEntities1">
+          <EntitySetMapping Name="rate_lock_cluster_divisions">
+            <EntityTypeMapping TypeName="RateLockModel.rate_lock_cluster_divisions">
+              <MappingFragment StoreEntitySet="rate_lock_cluster_divisions">
+                <ScalarProperty Name="division_id" ColumnName="division_id" />
+                <ScalarProperty Name="rate_lock_cluster_id" ColumnName="rate_lock_cluster_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rate_lock_cluster_history">
+            <EntityTypeMapping TypeName="RateLockModel.rate_lock_cluster_history">
+              <MappingFragment StoreEntitySet="rate_lock_cluster_history">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="rate_lock_cluster_id" ColumnName="rate_lock_cluster_id" />
+                <ScalarProperty Name="division_id" ColumnName="division_id" />
+                <ScalarProperty Name="action" ColumnName="action" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="date" ColumnName="date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rate_lock_cluster_rules">
+            <EntityTypeMapping TypeName="RateLockModel.rate_lock_cluster_rules">
+              <MappingFragment StoreEntitySet="rate_lock_cluster_rules">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="rate_lock_rule_group_id" ColumnName="rate_lock_rule_group_id" />
+                <ScalarProperty Name="rate_lock_cluster_id" ColumnName="rate_lock_cluster_id" />
+                <ScalarProperty Name="value" ColumnName="value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rate_lock_clusters">
+            <EntityTypeMapping TypeName="RateLockModel.rate_lock_clusters">
+              <MappingFragment StoreEntitySet="rate_lock_clusters">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="active" ColumnName="active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rate_lock_colors">
+            <EntityTypeMapping TypeName="RateLockModel.rate_lock_colors">
+              <MappingFragment StoreEntitySet="rate_lock_colors">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="hex_code" ColumnName="hex_code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rate_lock_datatype_operators">
+            <EntityTypeMapping TypeName="RateLockModel.rate_lock_datatype_operators">
+              <MappingFragment StoreEntitySet="rate_lock_datatype_operators">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="rate_lock_datatype_id" ColumnName="rate_lock_datatype_id" />
+                <ScalarProperty Name="rate_lock_operator_id" ColumnName="rate_lock_operator_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rate_lock_datatypes">
+            <EntityTypeMapping TypeName="RateLockModel.rate_lock_datatypes">
+              <MappingFragment StoreEntitySet="rate_lock_datatypes">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rate_lock_encompass_statuses">
+            <EntityTypeMapping TypeName="RateLockModel.rate_lock_encompass_statuses">
+              <MappingFragment StoreEntitySet="rate_lock_encompass_statuses">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rate_lock_field_options">
+            <EntityTypeMapping TypeName="RateLockModel.rate_lock_field_options">
+              <MappingFragment StoreEntitySet="rate_lock_field_options">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="field_id" ColumnName="field_id" />
+                <ScalarProperty Name="value" ColumnName="value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rate_lock_fields">
+            <EntityTypeMapping TypeName="RateLockModel.rate_lock_fields">
+              <MappingFragment StoreEntitySet="rate_lock_fields">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="display_name" ColumnName="display_name" />
+                <ScalarProperty Name="rate_lock_datatype_id" ColumnName="rate_lock_datatype_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rate_lock_folders">
+            <EntityTypeMapping TypeName="RateLockModel.rate_lock_folders">
+              <MappingFragment StoreEntitySet="rate_lock_folders">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="rate_lock_rule_type_id" ColumnName="rate_lock_rule_type_id" />
+                <ScalarProperty Name="rate_lock_rule_version_id" ColumnName="rate_lock_rule_version_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rate_lock_import_history">
+            <EntityTypeMapping TypeName="RateLockModel.rate_lock_import_history">
+              <MappingFragment StoreEntitySet="rate_lock_import_history">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="old_rate_lock_id" ColumnName="old_rate_lock_id" />
+                <ScalarProperty Name="new_rate_lock_id" ColumnName="new_rate_lock_id" />
+                <ScalarProperty Name="import_date" ColumnName="import_date" />
+                <ScalarProperty Name="imported_by" ColumnName="imported_by" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rate_lock_loan_info">
+            <EntityTypeMapping TypeName="RateLockModel.rate_lock_loan_info">
+              <MappingFragment StoreEntitySet="rate_lock_loan_info">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="field" ColumnName="field" />
+                <ScalarProperty Name="value" ColumnName="value" />
+                <ScalarProperty Name="rate_lock_id" ColumnName="rate_lock_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rate_lock_manual_product_codes">
+            <EntityTypeMapping TypeName="RateLockModel.rate_lock_manual_product_codes">
+              <MappingFragment StoreEntitySet="rate_lock_manual_product_codes">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="product_code_id" ColumnName="product_code_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rate_lock_manual_product_codes_history">
+            <EntityTypeMapping TypeName="RateLockModel.rate_lock_manual_product_codes_history">
+              <MappingFragment StoreEntitySet="rate_lock_manual_product_codes_history">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="product_codes" ColumnName="product_codes" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rate_lock_notifications">
+            <EntityTypeMapping TypeName="RateLockModel.rate_lock_notifications">
+              <MappingFragment StoreEntitySet="rate_lock_notifications">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="color_id" ColumnName="color_id" />
+                <ScalarProperty Name="message" ColumnName="message" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rate_lock_operators">
+            <EntityTypeMapping TypeName="RateLockModel.rate_lock_operators">
+              <MappingFragment StoreEntitySet="rate_lock_operators">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="operator" ColumnName="operator" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rate_lock_period_rules">
+            <EntityTypeMapping TypeName="RateLockModel.rate_lock_period_rules">
+              <MappingFragment StoreEntitySet="rate_lock_period_rules">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="rate_lock_rule_group_id" ColumnName="rate_lock_rule_group_id" />
+                <ScalarProperty Name="lock_period" ColumnName="lock_period" />
+                <ScalarProperty Name="is_available" ColumnName="is_available" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rate_lock_pricing_sheet">
+            <EntityTypeMapping TypeName="RateLockModel.rate_lock_pricing_sheet">
+              <MappingFragment StoreEntitySet="rate_lock_pricing_sheet">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="date" ColumnName="date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rate_lock_pricing_sheet_values">
+            <EntityTypeMapping TypeName="RateLockModel.rate_lock_pricing_sheet_values">
+              <MappingFragment StoreEntitySet="rate_lock_pricing_sheet_values">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="rate_lock_pricing_sheet_product_id" ColumnName="rate_lock_pricing_sheet_product_id" />
+                <ScalarProperty Name="call_center_price" ColumnName="call_center_price" />
+                <ScalarProperty Name="branch_price" ColumnName="branch_price" />
+                <ScalarProperty Name="rate_lock_pricing_sheet_id" ColumnName="rate_lock_pricing_sheet_id" />
+                <ScalarProperty Name="lock_period" ColumnName="lock_period" />
+                <ScalarProperty Name="rate" ColumnName="rate" />
+                <ScalarProperty Name="investor_pricing" ColumnName="investor_pricing" />
+                <ScalarProperty Name="srp" ColumnName="srp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rate_lock_reporting_fields">
+            <EntityTypeMapping TypeName="RateLockModel.rate_lock_reporting_fields">
+              <MappingFragment StoreEntitySet="rate_lock_reporting_fields">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rate_lock_rule_groups">
+            <EntityTypeMapping TypeName="RateLockModel.rate_lock_rule_groups">
+              <MappingFragment StoreEntitySet="rate_lock_rule_groups">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="header" ColumnName="header" />
+                <ScalarProperty Name="is_hidden" ColumnName="is_hidden" />
+                <ScalarProperty Name="rate_lock_folder_id" ColumnName="rate_lock_folder_id" />
+                <ScalarProperty Name="does_affect_target_profit" ColumnName="does_affect_target_profit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rate_lock_rule_types">
+            <EntityTypeMapping TypeName="RateLockModel.rate_lock_rule_types">
+              <MappingFragment StoreEntitySet="rate_lock_rule_types">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rate_lock_rule_values">
+            <EntityTypeMapping TypeName="RateLockModel.rate_lock_rule_values">
+              <MappingFragment StoreEntitySet="rate_lock_rule_values">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="rate_lock_rule_id" ColumnName="rate_lock_rule_id" />
+                <ScalarProperty Name="value" ColumnName="value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rate_lock_rule_versions">
+            <EntityTypeMapping TypeName="RateLockModel.rate_lock_rule_versions">
+              <MappingFragment StoreEntitySet="rate_lock_rule_versions">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rate_lock_rules">
+            <EntityTypeMapping TypeName="RateLockModel.rate_lock_rules">
+              <MappingFragment StoreEntitySet="rate_lock_rules">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="rate_lock_rule_group_id" ColumnName="rate_lock_rule_group_id" />
+                <ScalarProperty Name="rate_lock_field_id" ColumnName="rate_lock_field_id" />
+                <ScalarProperty Name="rate_lock_operator_id" ColumnName="rate_lock_operator_id" />
+                <ScalarProperty Name="compare_value" ColumnName="compare_value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rate_lock_statuses">
+            <EntityTypeMapping TypeName="RateLockModel.rate_lock_statuses">
+              <MappingFragment StoreEntitySet="rate_lock_statuses">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rate_lock_super_users">
+            <EntityTypeMapping TypeName="RateLockModel.rate_lock_super_users">
+              <MappingFragment StoreEntitySet="rate_lock_super_users">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rate_lock_types">
+            <EntityTypeMapping TypeName="RateLockModel.rate_lock_types">
+              <MappingFragment StoreEntitySet="rate_lock_types">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rate_lock_uploads">
+            <EntityTypeMapping TypeName="RateLockModel.rate_lock_uploads">
+              <MappingFragment StoreEntitySet="rate_lock_uploads">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="contents" ColumnName="contents" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rate_locks">
+            <EntityTypeMapping TypeName="RateLockModel.rate_locks">
+              <MappingFragment StoreEntitySet="rate_locks">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="loan_id" ColumnName="loan_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="rate" ColumnName="rate" />
+                <ScalarProperty Name="period" ColumnName="period" />
+                <ScalarProperty Name="lock_duration" ColumnName="lock_duration" />
+                <ScalarProperty Name="rate_lock_status_id" ColumnName="rate_lock_status_id" />
+                <ScalarProperty Name="rate_lock_type_id" ColumnName="rate_lock_type_id" />
+                <ScalarProperty Name="rate_lock_pricing_sheet_id" ColumnName="rate_lock_pricing_sheet_id" />
+                <ScalarProperty Name="rate_lock_rule_version_id" ColumnName="rate_lock_rule_version_id" />
+                <ScalarProperty Name="rate_lock_cluster_id" ColumnName="rate_lock_cluster_id" />
+                <ScalarProperty Name="undiscounted_rate" ColumnName="undiscounted_rate" />
+                <ScalarProperty Name="base_price" ColumnName="base_price" />
+                <ScalarProperty Name="adjusted_price" ColumnName="adjusted_price" />
+                <ScalarProperty Name="expiration_date" ColumnName="expiration_date" />
+                <ScalarProperty Name="days_extended" ColumnName="days_extended" />
+                <ScalarProperty Name="extension_cost" ColumnName="extension_cost" />
+                <ScalarProperty Name="product_code" ColumnName="product_code" />
+                <ScalarProperty Name="discount_paid_by_borrower" ColumnName="discount_paid_by_borrower" />
+                <ScalarProperty Name="exception_category" ColumnName="exception_category" />
+                <ScalarProperty Name="exception_note" ColumnName="exception_note" />
+                <ScalarProperty Name="cancel_date" ColumnName="cancel_date" />
+                <ScalarProperty Name="cancelled_by" ColumnName="cancelled_by" />
+                <ScalarProperty Name="investor_pricing" ColumnName="investor_pricing" />
+                <ScalarProperty Name="srp" ColumnName="srp" />
+                <ScalarProperty Name="update_to_encompass_status_id" ColumnName="update_to_encompass_status_id" />
+                <ScalarProperty Name="is_branch" ColumnName="is_branch" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
